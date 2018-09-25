@@ -20,7 +20,7 @@ update_configure_scripts
 ./get.Blas
 mkdir build
 cd build/
-../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --enable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
+../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
 make -j${nproc}
 make install
 
@@ -42,6 +42,7 @@ platforms = [
     Windows(:i686),
     Windows(:x86_64)
 ]
+platforms = expand_gcc_versions(platforms)
 
 # The products that we will ensure are always built
 products(prefix) = [
