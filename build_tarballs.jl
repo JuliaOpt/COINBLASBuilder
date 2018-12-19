@@ -20,11 +20,22 @@ update_configure_scripts
 ./get.Blas
 mkdir build
 cd build/
-../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
+## STATIC BUILD START
+#../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
+## STATIC BUILD END
+
+## DYNAMIC BUILD START
+if [ $target = "x86_64-apple-darwin14" ]; then
+  export AR=/opt/x86_64-apple-darwin14/bin/llvm-ar
+fi
+../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --disable-shared --enable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
+## DYNAMIC BUILD START
+
 make -j${nproc}
 make install
 
 """
+
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
