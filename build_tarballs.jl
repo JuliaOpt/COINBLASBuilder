@@ -21,14 +21,14 @@ update_configure_scripts
 mkdir build
 cd build/
 ## STATIC BUILD START
-#../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
-## STATIC BUILD END
-
-## DYNAMIC BUILD START
 if [ $target = "x86_64-apple-darwin14" ]; then
   export AR="$AR -format=darwin"
 fi
 ../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --disable-shared --enable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
+## STATIC BUILD END
+
+## DYNAMIC BUILD START
+#../configure --prefix=$prefix --with-pic --disable-pkg-config --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all
 ## DYNAMIC BUILD START
 
 make -j${nproc}
